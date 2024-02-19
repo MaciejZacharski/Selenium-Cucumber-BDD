@@ -3,6 +3,7 @@ package SeleniumDemo.Tests;
 import SeleniumDemo.Utils.DriverFactory;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import io.cucumber.java.After;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -27,11 +28,7 @@ public class BaseTest {
 
     }
 
-    @AfterMethod
-    public void tearDown() {
-          driver.quit();
 
-    }
     @BeforeSuite
     public void beforeSuite() {
         htmlReporter = new ExtentHtmlReporter("index.html");

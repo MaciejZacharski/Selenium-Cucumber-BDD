@@ -1,9 +1,12 @@
 package SeleniumDemo.Pages;
 
+import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+
+import java.util.List;
 
 public class MyAccountPage {
 
@@ -12,6 +15,8 @@ public class MyAccountPage {
     private WebElement registrationEmailInput;
     @FindBy(id = "reg_password")
     private WebElement registrationPasswordInput;
+    @FindBy(id = "reg_password")
+    private List<WebElement> registrationPasswordInputs;
     @FindBy(name = "register")
     private WebElement registrationButton;
 
@@ -38,10 +43,17 @@ public class MyAccountPage {
         return error;
     }
 
+    public String getErrorText() {
+        return error.getText();
+    }
+
     public LoggedUserPage registerUserValidData(String email, String password) {
 
         registerUser(email, password);
         return new LoggedUserPage(driver);
+    }
+    public int getUserNameInputSize() {
+       return registrationPasswordInputs.size();
     }
 
     public MyAccountPage registerUserInvalidEmail(String email, String password) {
@@ -51,6 +63,7 @@ public class MyAccountPage {
     }
 
     private void registerUser(String email, String password) {
+
 
         registrationEmailInput.sendKeys(email);
         registrationPasswordInput.sendKeys(password);
